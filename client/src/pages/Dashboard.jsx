@@ -38,6 +38,7 @@ const creatorsList = [
         name: "Arya Bhatt",
         description: "Visionary Founder & Full Stack Architect driving the PSRIET ecosystem.",
         linkedin: "https://www.linkedin.com/in/bhattarya4533",
+        whatsapp: "https://wa.me/91XXXXXXXXXX",
         image: "/arya.jpg" // Public folder me jo image ka naam rakha ho, yahan change kar lena
     },
     {
@@ -45,6 +46,7 @@ const creatorsList = [
         name: "Nilesh Vishwakarma",
         description: "Leading technical architecture & core development for the platform.",
         linkedin: "https://www.linkedin.com/in/nilesh-vishwakarma-5ba748399",
+        whatsapp: "https://wa.me/7398663942",
         image: "/nilesh.jpg"
     },
     {
@@ -52,6 +54,7 @@ const creatorsList = [
         name: "Pradeep Pal",
         description: "Managing platform operations & scaling system workflows seamlessly.",
         linkedin: "https://www.linkedin.com/in/pradeep-pal-3a5871393",
+        whatsapp: "https://wa.me/7398663942",
         image: "/pradeep.jpg"
     }
 ];
@@ -414,23 +417,60 @@ const Dashboard = () => {
                             <span className="creator-role">{creator.role}</span>
                             <h3>{creator.name}</h3>
                             <p>{creator.description}</p>
-                            <a
-                                href={creator.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="creator-linkedin-btn"
-                            >
-                                <svg
-                                    className="linkedin-icon"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
+                            <div className="creator-social-links">
+                                <a
+                                    href={creator.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="creator-social-link creator-social-linkedin"
+                                    aria-label="LinkedIn"
+                                    title="LinkedIn"
                                 >
-                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                                </svg>
-                                <span>Connect on LinkedIn</span>
-                                <span className="btn-arrow">.</span>
-                            </a>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href={creator.whatsapp}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="creator-social-link creator-social-whatsapp"
+                                    aria-label="WhatsApp"
+                                    title="WhatsApp"
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5Z" />
+                                        <path d="M8.5 9.5c.5 2.5 2 4 4.5 4.5l1-1.2 2 .8c-.2 1.3-1.2 2.2-2.5 2.2-3.6-.4-6.4-3.2-6.8-6.8 0-1.3.9-2.3 2.2-2.5l.8 2-1.2 1Z" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href="#"
+                                    className="creator-social-link creator-social-discord"
+                                    aria-label="Discord"
+                                    title="Discord"
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M19.7 5.3a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.6.6 13.8 1 17.9a18.6 18.6 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.3 13.3 0 0 0 11 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.6 18.6 0 0 0 5.7-2.9c.5-4.8-.8-9-3.3-12.6ZM8.7 14.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z" />
+                                    </svg>
+                                </a>
+                            </div>
                         </article>
                     ))}
                 </div>

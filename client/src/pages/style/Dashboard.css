@@ -2192,3 +2192,62 @@
 .creator-linkedin-btn:active {
   transform: translateY(0);
 }
+
+.creator-social-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: fit-content;
+  margin: 16px auto 0;
+  padding: 10px 24px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+  background: rgba(241, 245, 249, 0.8);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.creator-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  text-decoration: none;
+  transition: transform 200ms ease;
+}
+
+.creator-social-link:hover {
+  transform: scale(1.1);
+}
+
+.creator-social-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.creator-social-link svg {
+  width: 21px;
+  height: 21px;
+}
+
+.creator-social-linkedin {
+  color: #0a66c2;
+}
+
+.creator-social-whatsapp {
+  color: #25d366;
+}
+
+.creator-social-discord {
+  color: #5865f2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creator-social-link {
+    transition: none;
+  }
+}
