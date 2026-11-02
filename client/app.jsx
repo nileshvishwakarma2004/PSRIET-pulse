@@ -5,6 +5,7 @@ import { CurriculumLockProvider } from './src/context/CurriculumLockContext';
 
 // Main Portal & Courses Imports
 import Dashboard from "./src/pages/Dashboard";
+import CodingPractice from './src/pages/CodingPractice';
 import BaPage from "./src/pages/ba";
 import BbaPage from "./src/pages/bba";
 import BcaPage from "./src/pages/bca";
@@ -34,6 +35,7 @@ function App() {
               <Router>
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
+                    <Route path="/coding-test" element={<CodingPractice />} />
                     <Route path="/login" element={<LoginPage />} />
 
                     <Route path="/ba" element={<BaPage />} />

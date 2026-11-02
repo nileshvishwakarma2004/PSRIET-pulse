@@ -271,6 +271,7 @@ const Dashboard = () => {
                     </a>
                 </div>
                 <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                    <Link to="/coding-test" className="header-coding-test-btn">Coding Test</Link>
                     <a
                         href="http://mresult.prsuprayagraj.in/prsu_Results.aspx"
                         target="_blank"
@@ -493,6 +494,11 @@ const Dashboard = () => {
                     <span className="student-toolkit-badge">🎒 STUDENT TOOLKIT</span>
                     <h2 id="student-toolkit-title">Quick tools for your semester</h2>
                     <p>Check attendance, calculate marks, and keep your next exam in sight.</p>
+                    <Link to="/coding-test" className="student-tool-coding-link">
+                        <span aria-hidden="true">⌘</span>
+                        <span><strong>Coding Test</strong><small>Practice challenges with adaptive difficulty</small></span>
+                        <span aria-hidden="true">→</span>
+                    </Link>
                 </div>
                 <div className="student-toolkit-grid">
                     <article className={`student-tool-card${expandedTool === 'attendance' ? ' is-expanded' : ''}`}>
