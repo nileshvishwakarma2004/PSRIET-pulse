@@ -38,7 +38,7 @@ const creatorsList = [
         name: "Arya Bhatt",
         description: "Visionary Founder & Full Stack Architect driving the PSRIET ecosystem.",
         linkedin: "https://www.linkedin.com/in/bhattarya4533",
-        whatsapp: "https://wa.me/91XXXXXXXXXX",
+        whatsapp: "https://wa.me/9517471194",
         image: "/arya.jpg" // Public folder me jo image ka naam rakha ho, yahan change kar lena
     },
     {
@@ -54,7 +54,7 @@ const creatorsList = [
         name: "Pradeep Pal",
         description: "Managing platform operations & scaling system workflows seamlessly.",
         linkedin: "https://www.linkedin.com/in/pradeep-pal-3a5871393",
-        whatsapp: "https://wa.me/7398663942",
+        whatsapp: "https://wa.me/7905626181",
         image: "/pradeep.jpg"
     }
 ];
@@ -68,6 +68,8 @@ const Dashboard = () => {
     const [dynamicEvents, setDynamicEvents] = useState([]);
     const [dynamicDataError, setDynamicDataError] = useState('');
     const [enquiryError, setEnquiryError] = useState('');
+    const [enquirySuccess, setEnquirySuccess] = useState('');
+    const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     const [alumniIndex, setAlumniIndex] = useState(0);
@@ -216,20 +218,31 @@ const Dashboard = () => {
     const handleEnquirySubmit = async (event) => {
         event.preventDefault();
         setEnquiryError('');
+        setEnquirySuccess('');
+        setIsSubmittingEnquiry(true);
         const form = event.currentTarget;
         const formData = new FormData(form);
         try {
-            await createPortalRecord(portalRecordTypes.enquiry, {
+            await createPortalRecord('enquiry', {
                 name: formData.get('name').trim(),
                 phone: formData.get('phone').trim(),
                 course: formData.get('course'),
                 date: new Date().toLocaleDateString('hi-IN', { day: '2-digit', month: 'short', year: 'numeric' })
             }, null, false);
-            window.alert('Your enquiry was submitted successfully. Please contact the institute directly if you need an immediate response.');
+            setEnquirySuccess('Your enquiry was submitted successfully. The admission cell will contact you soon.');
             form.reset();
         } catch (error) {
-            console.error('Unable to submit admission enquiry to Supabase.', error);
-            setEnquiryError(error.message || 'Unable to submit your enquiry. Please try again.');
+            console.error('Unable to submit admission enquiry to the backend.', {
+                recordType: 'enquiry',
+                message: error?.message,
+                code: error?.code,
+                details: error?.details,
+                hint: error?.hint,
+                error
+            });
+            setEnquiryError(error?.message || 'Unable to submit your enquiry. Please try again.');
+        } finally {
+            setIsSubmittingEnquiry(false);
         }
     };
 
@@ -705,32 +718,10 @@ const Dashboard = () => {
                         <h2>Want to Join PTSRIET?</h2>
                         <p>Your enquiry will be shared with the institute. For an immediate response or fee details, please contact us directly.</p>
                     </div>
-                    <form className="enquiry-form" onSubmit={(e) => {
-                        e.preventDefault();
-
-                        const name = e.target[0].value;
-                        const phone = e.target[1].value;
-                        const course = e.target[2].value;
-
-                        const newEnquiry = {
-                            id: Date.now(),
-                            name: name,
-                            phone: phone,
-                            course: course,
-                            date: new Date().toLocaleDateString('hi-IN', { day: '2-digit', month: 'short', year: 'numeric' })
-                        };
-
-                        const existingEnquiries = JSON.parse(localStorage.getItem('pt_enquiries')) || [];
-                        const updatedEnquiries = [newEnquiry, ...existingEnquiries];
-
-                        localStorage.setItem('pt_enquiries', JSON.stringify(updatedEnquiries));
-
-                        alert('Query submitted successfully! Admission cell will contact you soon.');
-                        e.target.reset();
-                    }}>
-                        <input type="text" placeholder="Your Full Name" required className="enquiry-input" />
-                        <input type="tel" placeholder="Phone Number" required className="enquiry-input" />
-                        <select className="enquiry-input" required>
+                    <form className="enquiry-form" onSubmit={handleEnquirySubmit}>
+                        <input type="text" name="name" placeholder="Your Full Name" required className="enquiry-input" />
+                        <input type="tel" name="phone" placeholder="Phone Number" required className="enquiry-input" />
+                        <select name="course" className="enquiry-input" required>
                             <option value="">Select Interested Course</option>
                             <option value="bca">BCA (Computer Applications)</option>
                             <option value="bsc">BSc (Bachelor of Science)</option>
@@ -741,7 +732,10 @@ const Dashboard = () => {
                             <option value="ba">BA (Bachelor of Art)</option>
                         </select>
                         {enquiryError && <p className="portal-data-error" role="alert">{enquiryError}</p>}
-                        <button type="submit" className="enquiry-submit-btn">Request Callback 🚀</button>
+                        {enquirySuccess && <p role="status">{enquirySuccess}</p>}
+                        <button type="submit" className="enquiry-submit-btn" disabled={isSubmittingEnquiry}>
+                            {isSubmittingEnquiry ? 'Submitting...' : 'Request Callback 🚀'}
+                        </button>
                     </form>
                 </div>
             </section>
@@ -777,7 +771,15 @@ const Dashboard = () => {
 
                         <div className="uni-profile-card">
                             <div className="uni-card-img-container">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYCea70h3XgTlVdYgvSMvtEf6QRfB0UlupRGpCE5edYQ&s=10" alt="HOD / Academic Head" className="uni-profile-img" />
+                                <span className="uni-profile-fallback" aria-hidden="true">PP</span>
+                                <img
+                                    src="/pradeeppandey.jpg"
+                                    alt="Pradeep Pandey, HOD - Computer Science"
+                                    className="uni-profile-img"
+                                    onError={(event) => {
+                                        event.currentTarget.style.display = 'none';
+                                    }}
+                                />
                             </div>
                             <h3>Pradeep Pandey</h3>
                             <p className="uni-role">HOD - Computer Science</p>

@@ -1783,19 +1783,33 @@
 }
 
 .dashboard-container .uni-card-img-container {
+  position: relative;
   width: 110px;
   height: 110px;
   margin: 0 auto 15px auto;
   border-radius: 50%;
   overflow: hidden;
+  background: #e2e8f0;
   border: 3px solid #e2e8f0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.dashboard-container .uni-profile-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #475569;
+  font-weight: 700;
+}
+
 .dashboard-container .uni-profile-img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .dashboard-container .uni-profile-card h3 {

@@ -383,7 +383,17 @@ const BcaPage = () => {
       </section>
 
       <div className="bca-hod-card-light">
-        <img src="/pradeeppandey.jpg" className="hod-img-light" alt="HOD" />
+        <div className="hod-avatar-container">
+          <span className="hod-avatar-fallback" aria-hidden="true">PP</span>
+          <img
+            src="/pradeeppandey.jpg"
+            className="hod-img-light"
+            alt="Pradeep Pandey, HOD - Computer Science"
+            onError={(event) => {
+              event.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
         <div>
           <h3>Pradeep Pandey</h3>
           <p className="hod-title-light">HOD - Computer Science Department</p>
